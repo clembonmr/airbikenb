@@ -3,5 +3,6 @@ class Bike < ApplicationRecord
   has_many :bookings
   has_many :reviews, through: :bookings
   has_many :users, through: :bookings
-  validates :brand, :category, :photo, :daily_price, presence: true
+  validates :brand, :category, :daily_price, presence: true
+  mount_uploader :photo, PhotoUploader
 end

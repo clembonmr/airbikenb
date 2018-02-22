@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
 
   before_action :set_booking
 
-
   def new
     @review = Review.new
   end

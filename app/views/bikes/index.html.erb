@@ -1,0 +1,29 @@
+<div class="banner">
+  <div class="banner-content">
+<h1>Find a perfect bike for your next destination </h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @bikes.each do |bike| %>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card">
+
+          <% if bike.photo %>
+            <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
+            </div>
+          <% else %>
+            <div class="card-header" style="background-image: url('http://stylecartel.com/wp-content/uploads/2011/12/284333_I1870_8730_002-1024x763.jpg')">
+            </div>
+          <% end %>
+          <div class="card-body">
+            <%= link_to bike.brand, bike_path(bike) %>
+            <%= bike.category %>
+            <%= bike.daily_price %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

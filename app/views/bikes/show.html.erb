@@ -1,0 +1,18 @@
+<h1><%=@bike.brand%></h1>
+
+<h2>rent by <%=@bike.user.name%></h2>
+<p>Category: <%=@bike.category%></p>
+<p><%=@bike.description%></p>
+<p><%=@bike.daily_price%></p>
+<p><%=@bike.category%></p>
+<p><%=@bike.reviews.average_rate%></p>
+<%= cl_image_path @bike.photo, height: 600, width: 800, crop: :fill if @bike.photo.url %>
+<%= link_to "Edit bike", edit_bike_path(@bike) %>
+<%= link_to bikes_path, method: :delete, data: { confirm: 'Are you sure?' } do %>
+<i class="fas fa-trash"></i>
+<% end %>
+
+<h3>See all reviews for <%=@bike.brand%></h3>
+<% @reviews.each do |review| %>
+<p><%= review.description %> - <%= review.rate %></p>
+<% end %>

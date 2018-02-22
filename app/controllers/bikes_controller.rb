@@ -15,6 +15,7 @@ before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
   def create
     @bike = Bike.new(bike_params)
+    @bike.user = current_user
     if @bike.save
       redirect_to bike_path(@bike.id)
     else
@@ -36,7 +37,7 @@ before_action :set_bike, only: [:show, :edit, :update, :destroy]
   end
 
   def bike_params
-    params.require(:bike).permit(:brand, :category, :description, :photo, :daily_price, :latitude, :longitude, :user_id, :availability)
+    params.require(:bike).permit(:brand, :category, :description, :photo, :photo_cache, :daily_price, :latitude, :longitude, :user_id, :availability)
   end
 
   def set_bike

@@ -5,14 +5,19 @@
 <p><%=@bike.description%></p>
 <p><%=@bike.daily_price%></p>
 <p><%=@bike.category%></p>
-<p><%=@bike.reviews.average_rate%></p>
-<%= cl_image_path @bike.photo, height: 600, width: 800, crop: :fill if @bike.photo.url %>
+<p><%#=@bike.reviews.average_rate%></p>
+<%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
+
 <%= link_to "Edit bike", edit_bike_path(@bike) %>
-<%= link_to bikes_path, method: :delete, data: { confirm: 'Are you sure?' } do %>
+<%= link_to bike_path(@bike), method: :delete, data: { confirm: 'Are you sure?' } do %>
 <i class="fas fa-trash"></i>
 <% end %>
 
+<h2>Add a review for <%=@bike.brand%></h2>
+<%= link_to 'Add a review', new_bike_review_path(@bike) %>
 <h3>See all reviews for <%=@bike.brand%></h3>
-<% @reviews.each do |review| %>
-<p><%= review.description %> - <%= review.rate %></p>
+<% if @bike.bookings %>
+<% @bike.bookings.each do |booking| %>
+<p><%= booking.review.description %> - <%= booking.review.rate %></p>
+<% end %>
 <% end %>

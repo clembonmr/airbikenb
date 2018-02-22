@@ -14,16 +14,18 @@
             <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
             </div>
           <% else %>
-            <div class="card-header" style="background-image: url('http://stylecartel.com/wp-content/uploads/2011/12/284333_I1870_8730_002-1024x763.jpg')">
+            <div class="card-header" style="background-image: url('http://stylecartel.com/wp-content/uploads/2011/12/284333_I1870_8730_002-1024x763.jpg'); border: 1px solid">
             </div>
           <% end %>
           <div class="card-body">
-            <%= link_to bike.brand, bike_path(bike) %>
-            <%= bike.category %>
-            <%= bike.daily_price %>
+            <p><%= link_to bike.brand, bike_path(bike) %></p>
+            <p><%= bike.category %></p>
+            <p><%= bike.daily_price %></p>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+<%= link_to 'Add bike', new_bike_path %>

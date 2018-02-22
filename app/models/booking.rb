@@ -2,7 +2,7 @@ class Booking < ApplicationRecord
   belongs_to :bike
   belongs_to :user
   validates :start_date, :end_date, presence: true
-  validates :start_date_cannot_be_in_the_past, on: :create
+  # validates :start_date_cannot_be_in_the_past, on: :create
   # validates :end_date_must_be_after_today
 
 

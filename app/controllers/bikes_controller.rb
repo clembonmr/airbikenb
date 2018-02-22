@@ -1,4 +1,4 @@
-class BikeController < ApplicationController
+class BikesController < ApplicationController
 before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
 

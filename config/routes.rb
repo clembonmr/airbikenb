@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :reviews, except: [:index, :destroy]
     resources :bookings
   end
+  get '/profile/:id', to: 'users#show', as: 'profile'
 
-  resources :users, only: [:show]
 
 end

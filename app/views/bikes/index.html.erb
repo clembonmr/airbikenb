@@ -14,7 +14,7 @@
             <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
             </div>
           <% else %>
-            <div class="card-header" style="background-image: url('http://stylecartel.com/wp-content/uploads/2011/12/284333_I1870_8730_002-1024x763.jpg'); border: 1px solid">
+            <div class="card-header" style="background-image: url('<%= cl_image_tag("653px-usdot_highway_sign_bicycle_symbol_-_blacksvg.png") %>'); border: 1px solid">
             </div>
           <% end %>
           <div class="card-body">
@@ -29,3 +29,6 @@
 </div>
 
 <%= link_to 'Add bike', new_bike_path %>
+
+<div id="map" style="width: 80%; height: 600px;" data-markers="<%= @markers.to_json %>"
+></div>

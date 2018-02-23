@@ -1,0 +1,21 @@
+.banner {
+  min-height: 40vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.2)), url('http://res.cloudinary.com/dxkimzdwk/image/upload/v1519368284/michal-wichrzynski-70497-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  box-shadow: 1px 1px 46px #8080808a;
+  margin-bottom: 30px;
+  z-index: 2;
+}
+
+.banner-content {
+  text-align: center;
+  display: block;
+
+}
+

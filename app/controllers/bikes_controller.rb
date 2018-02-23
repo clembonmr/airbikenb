@@ -1,4 +1,5 @@
 class BikesController < ApplicationController
+
 before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
 
@@ -7,6 +8,7 @@ before_action :set_bike, only: [:show, :edit, :update, :destroy]
   end
 
   def show
+    @reviews = Review.where(bike_id: @bike)
   end
 
   def new

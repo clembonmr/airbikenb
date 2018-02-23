@@ -13,11 +13,10 @@
 <i class="fas fa-trash"></i>
 <% end %>
 
-<h2>Add a review for <%=@bike.brand%></h2>
-<%= link_to 'Add a review', new_bike_review_path(@bike) %>
 <h3>See all reviews for <%=@bike.brand%></h3>
-<% if @bike.bookings %>
-<% @bike.bookings.each do |booking| %>
-<p><%= booking.review.description %> - <%= booking.review.rate %></p>
-<% end %>
+ <% @reviews.each do |review| %>
+ <p> <%= review.rate %> / <%= review.description %>   </p>
+ <% end %>
+<% if @bike.user != current_user %>
+<%= link_to "Book the bike", new_bike_booking_path(@bike) %>
 <% end %>

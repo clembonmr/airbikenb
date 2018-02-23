@@ -12,7 +12,7 @@
 <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-
+  <%= link_to "your profile", profile_path(current_user) %>
   <% if user_signed_in?%>
   <%= link_to "Logout", destroy_user_session_path,  :method=>'delete' %>
   <% else %>
@@ -21,6 +21,9 @@
   <% end %>
   <%= yield %>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+
   <%= javascript_pack_tag 'application' %>
+  <%= javascript_pack_tag "map" %>
 </body>
 </html>

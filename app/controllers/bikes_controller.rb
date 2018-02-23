@@ -1,12 +1,21 @@
 class BikesController < ApplicationController
-before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
+before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
   def index
     @bikes = Bike.all
+    # @bikes = Bike.where.not(latitude: nil, longitude: nil)
+    #    @markers = @bikes.map do |bike|
+    #   {
+    #     lat: bike.latitude,
+    #     lng: bike.longitude
+    #     # infoWindow: { content: render_to_string(partial: "/bikes/map_box", locals: { bike: bike }) }
+    #   }
+    # end
   end
 
   def show
+    @reviews = Review.where(bike_id: @bike)
   end
 
   def new
@@ -37,7 +46,7 @@ before_action :set_bike, only: [:show, :edit, :update, :destroy]
   end
 
   def bike_params
-    params.require(:bike).permit(:brand, :category, :description, :photo, :photo_cache, :daily_price, :latitude, :longitude, :user_id, :availability)
+    params.require(:bike).permit(:brand, :category, :location, :description, :photo, :photo_cache, :daily_price, :latitude, :longitude, :user_id, :availability)
   end
 
   def set_bike

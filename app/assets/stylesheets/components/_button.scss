@@ -2,11 +2,10 @@
 .new-button {
   font-size: 16px;
   text-decoration: none;
-  background-color: #ffffff3b;
+  background-color: #78b71c;
   border-radius: 6px;
-  padding: 10px;
+  padding: 14px;
   color: white;
-  border: 1px solid #ffffff61;
   vertical-align: middle;
   margin-top: 10px;
   transition: all 0.3s cubic-bezier(0.1, 0.71, 0.25, 1);
@@ -16,5 +15,5 @@
 .new-button:hover {
   text-decoration: none;
   color: white;
-  background-color: #ffffff66;
+  background-color: #89c333;
 }

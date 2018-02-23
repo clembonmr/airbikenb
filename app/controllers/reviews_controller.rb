@@ -1,17 +1,19 @@
 class ReviewsController < ApplicationController
 
-  before_action :set_booking
 
   def new
     @review = Review.new
+    @booking = Booking.find(params[:booking_id])
   end
+
 
   def create
     @review = Review.new(review_params)
+    @booking = Booking.find(params[:booking_id])
+    @review.bike_id = @booking.bike_id
     @review.booking = @booking
-
     if @review.save
-      redirect_to booking_path(@booking)
+      redirect_to bike_path(@booking.bike_id)
     else
       render :new  # renders the new view
     end
@@ -36,7 +38,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:description, :rate)
   end
 
-  def set_booking
-    @booking = Booking.find(params[:booking_id])
-  end
+  # def set_booking
+  #   @booking = Booking.find(params[:booking_id])
+  # end
 end

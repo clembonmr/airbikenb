@@ -1,35 +1,66 @@
-<h1><%=@bike.brand%></h1>
 
-<h2>rent by <%=@bike.user.name%></h2>
-<p>Category: <%=@bike.category%></p>
-<p><%=@bike.description%></p>
-<p><%=@bike.daily_price%></p>
-<p><%=@bike.category%></p>
-<p><%#=@bike.reviews.average_rate%></p>
-<p><%= @bike.location %></p>
-<% if @bike.avaible? %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h1><%=@bike.brand%></h1>
+      <h2>rent by <%=@bike.user.name%></h2>
+      <h4>Category</h4> <p><%=@bike.category%></p>
+      <h4>Description</h4><p><%=@bike.description%></p>
+      <h4>Daily price</h4><p><%=@bike.daily_price%></p>
+      <h4>Location</h4><p><%= @bike.location %></p>
+      <% if @bike.avaible? %>
 
-<p> Bike Avaible for rent!</p>
-<% else  %>
-<p> Bike not avaible!</p>
-<p> The bike will be avaible agan on <%= @bike.avaibility %> </p>
-<% end %>
-<%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
+      <p style="color: red"> Bike Avaible for rent!</p>
+      <% else  %>
+      <p style="color: red">  Bike actually not avaible!</p>
+      <p style="color: red"> The bike will be avaible agan on <%= @bike.avaibility %> </p>
+      <% end %>
+      <%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
 
-<%= link_to "Edit bike", edit_bike_path(@bike) %>
-<%= link_to bike_path(@bike.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
-<i class="fas fa-trash"></i>
-<% end %>
+      <%= link_to "Edit bike", edit_bike_path(@bike) %>
+      <%= link_to bike_path(@bike.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="fas fa-trash"></i>
+      <% end %>
 
-<h3>See all reviews for <%=@bike.brand%></h3>
- <% @reviews.each do |review| %>
- <p> <%= review.rate %> / <%= review.description %>   </p>
- <% end %>
-<% if @bike.user != current_user && @bike.avaible?%>
-<%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
-<% elsif @bike.user != current_user && !@bike.avaible?%>
-<%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
-<p> Bike not avaible!</p>
-<p> U can still book the bike, but it will be avaible from the <%= @bike.avaibility %> </p>
+      <h3>See all reviews for <%=@bike.brand%></h3>
+      <% @reviews.each do |review| %>
+      <p> <%= review.rate %> / <%= review.description %>   </p>
+      <% end %>
+      <% if @bike.user != current_user && @bike.avaible?%>
+      <%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
+      <% elsif @bike.user != current_user && !@bike.avaible?%>
+      <%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
+      <p style="color: red"> Bike not avaible!</p>
+      <p style="color: red">U can still book the bike, but it will be avaible from the <%= @bike.avaibility %> </p>
 
-<% end %>
+      <% end %>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+                 <h1>Read the reviews</h1>
+          <% @reviews.each do |review| %>
+
+          <div class="row" style="border: 1px solid black; border-radius: 2px">
+          <p> <strong> Review written by </strong>review.user.name</p>
+          <p> <strong>Rating</strong> <%= review.rate %></p>
+          <p> <strong>Description </strong></p>
+          <%= review.description %>
+
+       </div>
+
+     <% end %>
+      </div>
+  </div>
+</div>
+
+
+
+

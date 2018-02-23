@@ -7,23 +7,53 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+
+
+# CREATING USERS
+
+puts "Deleting all bikes"
+Bike.destroy_all
+
+puts "Deleting all users"
+User.destroy_all
+
+
+puts "Creating users"
+12.times do
+  user = User.new(
+    email: Faker::Internet.free_email,
+    password: Faker::Internet.password(8),
+    phone_number: Faker::PhoneNumber.phone_number,
+    name: Faker::Name.first_name)
+  if user.save
+    puts user.name + " created!"
+  end
+end
+
+puts "#{User.count} users created!"
+
+
+
+
+
+# CREATING BIKES
+
+puts "Creating bikes"
+
 brand = ["Cervélo", "American Eagle", "Avanti", "Bianchi", "Cannondale", "Canyon bicycles", "Diamondback Bicycles", "Giant", "K2 Sports", "Lapierre", "Mongoose", "Scott", "Specialized"]
 
 category = %w(road moutain city beach enduro hybrid triathlon)
 
-
-puts "Deleting all bikes"
-Bike.destroy_all
-puts "Creating 10 bikes"
-100.times do
-  bikes = Bike.new(
+10.times do
+  bike = Bike.new(
+    # user_id = User.all.sample.id,
     brand: brand.sample,
     category: category.sample,
-    description: Faker::Lorem.sentence(40, true, 10)
-    daily_price: rand(5..20)*10
+    description: Faker::Lorem.sentence(40, true, 10),
+    daily_price: rand(5..20)*10,
     location: Faker::Address.street_address)
-  if bikes.save
-    puts bikes.name + " created!"
+  if bike.save
+    puts bike.name + " created!"
   end
 end
 

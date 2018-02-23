@@ -7,10 +7,17 @@
 <p><%=@bike.category%></p>
 <p><%#=@bike.reviews.average_rate%></p>
 <p><%= @bike.location %></p>
+<% if @bike.avaible? %>
+
+<p> Bike Avaible for rent!</p>
+<% else  %>
+<p> Bike not avaible!</p>
+<p> The bike will be avaible agan on <%= @bike.avaibility %> </p>
+<% end %>
 <%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
 
 <%= link_to "Edit bike", edit_bike_path(@bike) %>
-<%= link_to bike_path(@bike), method: :delete, data: { confirm: 'Are you sure?' } do %>
+<%= link_to bike_path(@bike.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
 <i class="fas fa-trash"></i>
 <% end %>
 
@@ -18,6 +25,11 @@
  <% @reviews.each do |review| %>
  <p> <%= review.rate %> / <%= review.description %>   </p>
  <% end %>
-<% if @bike.user != current_user %>
-<%= link_to "Book the bike", new_bike_booking_path(@bike) %>
+<% if @bike.user != current_user && @bike.avaible?%>
+<%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
+<% elsif @bike.user != current_user && !@bike.avaible?%>
+<%= link_to "Book the bike", new_bike_booking_path(@bike), class: "btn btn-primary" %>
+<p> Bike not avaible!</p>
+<p> U can still book the bike, but it will be avaible from the <%= @bike.avaibility %> </p>
+
 <% end %>

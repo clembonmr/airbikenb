@@ -6,6 +6,7 @@
 <p><%=@bike.daily_price%></p>
 <p><%=@bike.category%></p>
 <p><%#=@bike.reviews.average_rate%></p>
+<p><%= @bike.location %></p>
 <%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
 
 <%= link_to "Edit bike", edit_bike_path(@bike) %>

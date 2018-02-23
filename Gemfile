@@ -18,6 +18,8 @@ gem 'webpacker'
 gem 'devise'
 gem 'cloudinary'
 gem 'carrierwave', '~> 0.11.2'
+gem "geocoder"
+
 
 
 group :development do

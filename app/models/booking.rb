@@ -30,4 +30,12 @@ class Booking < ApplicationRecord
     end
   end
 
+  def total_price
+    # @bookings = Booking.where(bike_id: self.bike_id)
+    duration = (self.end_date.to_date - self.start_date.to_date).to_i
+    @bike = Bike.find(self.bike_id)
+    @price = @bike.daily_price * duration
+    return @price
+  end
+
 end

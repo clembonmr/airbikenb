@@ -12,14 +12,17 @@
   </div>
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
-      <p>Your bookings <% @user.bookings.each do |booking|%></p>
-      <p> Booking nr : <%= booking.id %></p>
+      <div style="display: flex; justify-content: start">
+      <div><p><% @user.bookings.each do |booking|%></p></div>
+      <div><p> Booking reference : <%=booking.id %></p></div>
+      <div><p> Start date: <%= booking.start_date.strftime("%A, %b %d") %></p></div>
+      <div><p> End date: <%= booking.end_date.strftime("%A, %b %d") %></p></div>
+      <div><p>Total price: <%= booking.total_price %> EUR</p></div>
       <% if Review.where(booking_id: booking.id) == []  %>
       <%= link_to "review your experience", new_booking_review_path(booking.id) %>
       <% end %>
       <% end %>
+      </div>
     </div>
   </div>
-
-
 </div>

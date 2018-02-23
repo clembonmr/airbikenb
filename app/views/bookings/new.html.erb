@@ -2,10 +2,16 @@
 <h1>Book <%= @bike.brand %></h1>
 <%= cl_image_tag @bike.photo, height: 300, width: 300, crop: :fill %>
 
+<% if !@bike.avaible? %>
+  <p>The Bike is actually rented till <%= @bike.avaibility %></p>
+<% end %>
 
+<% @bike.future_bookings.each do |booking|%>
+<p> The bike already has a booking from <%= (booking.start_date).strftime("%A, %b %d") %> to <%= (booking.end_date).strftime("%A, %b %d") %> </p>
+<% end %>
 
 <%= simple_form_for ([@bike, @booking ]) do |f| %>
-  <%= f.input :start_date,  :as => :date, :start_year => Date.today.year ,
+  <%= f.input :start_date,  :as => :date, :start_year => Date.today.year,
 :order => [ :day, :month, :year], :required => true %>
   <%= f.input :end_date, :as => :date, :start_year => Date.today.year ,
 :order => [ :day, :month, :year], :required => true %>

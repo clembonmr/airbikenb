@@ -3,6 +3,7 @@ class BikesController < ApplicationController
   before_action :set_bike, only: [:show, :edit, :update, :destroy]
 
   def index
+
     # @bikes = Bike.all
     @bikes = Bike.where.not(latitude: nil, longitude: nil)
 
@@ -41,10 +42,16 @@ class BikesController < ApplicationController
       redirect_to bikes_path
     end
 
-    def destroy
-      @bike.destroy
-      redirect_to bikes_path
+  def destroy
+    @bike = Bike.find(params[:id])
+    @reviews = Review.where()
+    @bookings = Booking.where(bike_id: @bike.id )
+    @bookings.each do |rev|
+      rev.delete
     end
+    @bike.delete
+    redirect_to bikes_path
+  end
 
     def bike_params
       params.require(:bike).permit(:brand, :category, :location, :description, :photo, :photo_cache, :daily_price, :latitude, :longitude, :user_id, :availability)

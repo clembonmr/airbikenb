@@ -42,14 +42,16 @@ brand = ["Cervélo", "American Eagle", "Avanti", "Bianchi", "Cannondale", "Canyo
 
 category = %w(road moutain city beach enduro hybrid triathlon)
 
-50.times do
+address = %w(milano roma firenze venize naples bari tarronto lecce pompeii latina ancona vasto andria piza genoa bologna verona turin asti paris berlin lisbon oslo london)
+
+40.times do
   bike = Bike.new(
     user_id: User.all.sample.id,
     brand: brand.sample,
     category: category.sample,
-    description: Faker::Lorem.sentence(40, true, 10),
+    description: Faker::Lorem.sentence(200, true, 40),
     daily_price: rand(5..20)*10,
-    location: Faker::Address.city,
+    location: address.sample,
     remote_photo_url: "http://res.cloudinary.com/dxkimzdwk/image/upload/v1519361768/b#{rand(1..10)}.jpg")
   if bike.save
     puts bike.brand + " created!"

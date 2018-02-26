@@ -38,8 +38,4 @@ def future_bookings
 end
 
 
-
-
-
-
 end

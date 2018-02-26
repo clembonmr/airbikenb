@@ -4,16 +4,16 @@ class BikesController < ApplicationController
 
   def index
 
-    @bikes = Bike.all
-    # @bikes = Bike.where.not(latitude: nil, longitude: nil)
+    # @bikes = Bike.all
+    @bikes = Bike.where.not(latitude: nil, longitude: nil)
 
-    # @markers = @bikes.map do |bike|
-    #   {
-    #     lat: bike.latitude,
-    #     lng: bike.longitude
-    #       # infoWindow: { content: render_to_string(partial: "/bikes/map_box", locals: { bike: bike }) }
-    #     }
-    #   end
+    @markers = @bikes.map do |bike|
+      {
+        lat: bike.latitude,
+        lng: bike.longitude
+          # infoWindow: { content: render_to_string(partial: "/bikes/map_box", locals: { bike: bike }) }
+        }
+      end
     end
 
     def show

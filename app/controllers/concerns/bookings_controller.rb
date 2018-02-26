@@ -29,6 +29,7 @@ class BookingsController < ApplicationController
     @booking.delete
     redirect_to root_path
   end
+
 private
 
 def booking_params

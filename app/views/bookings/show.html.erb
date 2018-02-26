@@ -1,0 +1,8 @@
+
+
+<p> Booking status: <%= @booking.status %></p>
+<%= link_to "confirm", confirm_booking_path(@booking.id), method: :patch  %>
+<%= link_to "decline", decline_booking_path(@booking.id), method: :patch  %>
+
+
+

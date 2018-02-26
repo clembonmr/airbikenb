@@ -1,11 +1,13 @@
 class Booking < ApplicationRecord
+
+
   belongs_to :bike
   belongs_to :user
   has_one :review
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date?
   validate :date_future
-  validate :check_avaibility
+  validate :check_avaibility, on: :create
 
 
   def check_avaibility
@@ -37,5 +39,6 @@ class Booking < ApplicationRecord
     @price = @bike.daily_price * duration
     return @price
   end
+
 
 end

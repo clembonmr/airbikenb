@@ -2,19 +2,19 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'bikes#index'
 
   resources :bikes do
-    # resources :reviews, except: [:index, :destroy]
     resources :bookings
   end
 
-  resources :bookings, only: [] do
+  resources :bookings do
+    member do
+    patch "confirm"
+    patch "decline"
     resources :reviews, only: [:create, :new]
   end
-
-  get '/profile/:id', to: 'users#show', as: 'profile'
-
+end
+  get '/profile/:id', to: 'users#show', as: 'profile';
 
 end

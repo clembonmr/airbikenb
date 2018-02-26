@@ -1,19 +1,36 @@
 
-<h1>Book <%= @bike.brand %></h1>
-<%= cl_image_tag @bike.photo, height: 300, width: 300, crop: :fill %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-4">
+      <h1>Booking request </h1>
+      <h3> <%= @bike.brand.capitalize %> </h3>
+      <%= cl_image_tag @bike.photo, height: 300, width: 300, crop: :fill %>
+      <% if !@bike.avaible? %>
+      <div class="alert alert-danger" role="alert">
+        <p>The Bike is actually rented till <%= @bike.avaibility %></p>
+     </div>
+     <% else %>
+      <div class="alert alert-success" role="success">
+        <p>There are no reservation for this bike! Do it! </p>
+     </div>
 
-<% if !@bike.avaible? %>
-  <p>The Bike is actually rented till <%= @bike.avaibility %></p>
-<% end %>
+     <% end %>
 
-<% @bike.future_bookings.each do |booking|%>
-<p> The bike already has a booking from <%= (booking.start_date).strftime("%A, %b %d") %> to <%= (booking.end_date).strftime("%A, %b %d") %> </p>
-<% end %>
+     <% @bike.future_bookings.each do |booking|%>
+     <p> The bike already has a booking from <%= (booking.start_date).strftime("%A, %b %d") %> to <%= (booking.end_date).strftime("%A, %b %d") %> </p>
+     <% end %>
 
-<%= simple_form_for ([@bike, @booking ]) do |f| %>
-  <%= f.input :start_date,  :as => :date, :start_year => Date.today.year,
-:order => [ :day, :month, :year], :required => true %>
-  <%= f.input :end_date, :as => :date, :start_year => Date.today.year ,
-:order => [ :day, :month, :year], :required => true %>
-  <%= f.submit "Book!", class: "btn btn-primary" %>
-<% end %>
+     <%= simple_form_for ([@bike, @booking ]) do |f| %>
+     <%= f.input :start_date,  :as => :date, :start_year => Date.today.year,
+     :order => [ :day, :month, :year], :required => true %>
+     <%= f.input :end_date, :as => :date, :start_year => Date.today.year ,
+     :order => [ :day, :month, :year], :required => true %>
+     <%= link_to "Go Back", bike_path(@bike.id), class: "btn btn-danger"%>
+     <%= f.submit "Book!", class: "btn btn-primary" %>
+     <% end %>
+
+   </div>
+ </div>
+</div>
+
+

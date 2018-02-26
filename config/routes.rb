@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   end
 end
   get '/profile/:id', to: 'users#show', as: 'profile';
+  get '/user/:id/bookings', to: 'bookings#userlist', as: 'user_bokings'
+  get '/user/:id/rent_requests', to: 'bookings#rent_requests', as: 'rent_requests'
 
 end

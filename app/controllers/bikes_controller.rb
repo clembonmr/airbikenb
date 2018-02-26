@@ -4,15 +4,22 @@ class BikesController < ApplicationController
 
   def index
 
-    # @bikes = Bike.all
     @bikes = Bike.where.not(latitude: nil, longitude: nil)
 
     @markers = @bikes.map do |bike|
       {
         lat: bike.latitude,
         lng: bike.longitude
-          # infoWindow: { content: render_to_string(partial: "/bikes/map_box", locals: { bike: bike }) }
         }
+      end
+      if user_signed_in?
+
+        @user = current_user
+        @filter = @user.my_rentals
+        @list = @filter.map do |booking|
+          {status: booking.status}
+        end
+        @json = @list.to_json
       end
     end
 
@@ -42,16 +49,16 @@ class BikesController < ApplicationController
       redirect_to bikes_path
     end
 
-  def destroy
-    @bike = Bike.find(params[:id])
-    @reviews = Review.where()
-    @bookings = Booking.where(bike_id: @bike.id )
-    @bookings.each do |rev|
-      rev.delete
+    def destroy
+      @bike = Bike.find(params[:id])
+      @reviews = Review.where()
+      @bookings = Booking.where(bike_id: @bike.id )
+      @bookings.each do |rev|
+        rev.delete
+      end
+      @bike.delete
+      redirect_to bikes_path
     end
-    @bike.delete
-    redirect_to bikes_path
-  end
 
     def bike_params
       params.require(:bike).permit(:brand, :category, :location, :description, :photo, :photo_cache, :daily_price, :latitude, :longitude, :user_id, :availability)

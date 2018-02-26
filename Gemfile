@@ -23,6 +23,7 @@ gem 'faker'
 
 gem "geocoder"
 
+gem 'kaminari'
 
 
 

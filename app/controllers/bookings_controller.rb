@@ -4,6 +4,11 @@ class BookingsController < ApplicationController
     @booking = Booking.all
   end
 
+  def show
+    @booking = Booking.find(params[:id])
+end
+
+
   def new
     @bike = Bike.find(params[:bike_id])
     @user = current_user
@@ -30,10 +35,24 @@ class BookingsController < ApplicationController
     redirect_to root_path
   end
 
+  def confirm
+    @booking = Booking.find(params[:id])
+    @booking.status = 1
+    @booking.save
+    redirect_to booking_path(@booking.id)
+  end
+
+
+  def decline
+    @booking = Booking.find(params[:id])
+    @booking.status = 2
+    @booking.save
+    redirect_to booking_path(@booking.id)
+  end
 private
 
 def booking_params
-  params.require(:booking).permit(:start_date, :end_date, :user_id, :bike_id)
+  params.require(:booking).permit(:start_date, :end_date, :user_id, :bike_id, :status)
 end
 
 end

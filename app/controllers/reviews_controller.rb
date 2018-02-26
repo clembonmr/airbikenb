@@ -34,6 +34,14 @@ class ReviewsController < ApplicationController
     redirect_to bike_path(@booking.bike)
   end
 
+
+
+
+
+
+
+
+
   def review_params
     params.require(:review).permit(:description, :rate)
   end

@@ -35,7 +35,6 @@ end
     redirect_to root_path
   end
 
-
   def confirm
     @booking = Booking.find(params[:id])
     @booking.status = 1

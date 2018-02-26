@@ -1,8 +1,28 @@
 // Specific CSS for your home-page
 
 
-.map-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.main-container {
+  display: block;
 }
+
+
+.map-container {
+  flex: 0 0 400px;
+  height: 100vh;
+  position: sticky !important;
+  top: 0 !important;
+}
+
+
+#map {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+@media (min-width: 768px) {
+  .main-container {
+    display: flex;
+  }
+}
+

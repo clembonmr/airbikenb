@@ -9,31 +9,35 @@
 </div>
 
 
-<div class="container">
-  <div class="row">
-    <% @bikes.each do |bike| %>
-      <div class="col-xs-6 col-sm-6 col-md-4">
+<div class="main-container">
+  <div class="card-wrapper">
+    <div class="row">
+      <% @bikes.each do |bike| %>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="card">
           <% if bike.photo %>
-            <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
-              <p><%= link_to bike.brand, bike_path(bike) %></p>
-            </div>
+          <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
+            <p><%= link_to bike.brand, bike_path(bike), class: "card-title" %></p>
+            <%= cl_image_tag bike.user.photo, class: "card-avatar" %>
+          </div>
           <% else %>
-            <div class="card-header" style="background-image: url('<%= cl_image_tag("653px-usdot_highway_sign_bicycle_symbol_-_blacksvg.png") %>'); border: 1px solid">
-            </div>
+          <div class="card-header" style="background-image: url('<%= cl_image_tag("653px-usdot_highway_sign_bicycle_symbol_-_blacksvg.png") %>'); border: 1px solid">
+          </div>
           <% end %>
           <div class="card-body">
-            <p><%= bike.category %></p>
-            <p><%= bike.daily_price %> $/day</p>
+            <p class="element"><%= bike.category %></p>
+            <p class="element"><%= bike.daily_price %> $/day</p>
+            <p class="element last"><%= bike.reviews.size %> reviews</p>
           </div>
         </div>
       </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="map-container">
-  <div id="map" style="width: 80%; height: 600px;" data-markers="<%= @markers.to_json %>"
-  ></div>
-</div>
 
+  <div class="map-container">
+    <div id="map" data-markers="<%= @markers.to_json %>"
+      ></div>
+    </div>
+  </div>

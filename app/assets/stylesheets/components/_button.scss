@@ -17,3 +17,16 @@
   color: white;
   background-color: #89c333;
 }
+
+.btn-book {
+  background-color: #78b71c;
+  border: none;
+  margin: 10px;
+  transition: all 0.3s cubic-bezier(0.1, 0.71, 0.25, 1);
+}
+
+.btn-book:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #89c333;
+}

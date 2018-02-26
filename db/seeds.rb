@@ -11,12 +11,16 @@
 
 # CREATING USERS
 
-puts "Deleting all bikes"
+puts "///   Deleting all reviews"
+Review.destroy_all
+puts "///   Deleting all bookings"
+Booking.destroy_all
+puts "///   Deleting all bikes"
 Bike.destroy_all
 
 
-puts "Creating users"
-12.times do
+puts "///   Creating users"
+16.times do
   user = User.new(
     email: Faker::Internet.free_email,
     password: Faker::Internet.password(8),
@@ -28,7 +32,7 @@ puts "Creating users"
   end
 end
 
-puts "#{User.count} users created!"
+puts "///   #{User.count} users created!"
 
 
 
@@ -36,7 +40,7 @@ puts "#{User.count} users created!"
 
 # CREATING BIKES
 
-puts "Creating bikes"
+puts "///   Creating bikes"
 
 brand = ["Cervélo", "American Eagle", "Avanti", "Bianchi", "Cannondale", "Canyon bicycles", "Diamondback Bicycles", "Giant", "K2 Sports", "Lapierre", "Mongoose", "Scott", "Specialized"]
 
@@ -44,7 +48,7 @@ category = %w(road moutain city beach enduro hybrid triathlon)
 
 address = %w(milano roma firenze venize naples bari tarronto lecce pompeii latina ancona vasto andria piza genoa bologna verona turin asti paris berlin lisbon oslo london)
 
-40.times do
+30.times do
   bike = Bike.new(
     user_id: User.all.sample.id,
     brand: brand.sample,
@@ -58,4 +62,39 @@ address = %w(milano roma firenze venize naples bari tarronto lecce pompeii latin
   end
 end
 
-puts "#{Bike.count} bikes created!"
+puts "///   #{Bike.count} bikes created!"
+
+# CREATING BOOKINGS
+
+puts "///   Creating bookings"
+
+Bike.all.each do |bike|
+  x = rand (1..8)
+  x.times do
+    booking = Booking.new
+    booking.bike_id = bike.id
+    booking.user_id = User.all.sample.id
+    booking.start_date = Date.today + rand(1..100000)
+    booking.end_date = booking.start_date + 7
+    booking.save
+    puts "1 booking just created for #{bike.brand}"
+  end
+end
+puts "///  #{Booking.count} booking created!"
+
+
+# CREATING REVIEWS
+puts "///   Creating reviews"
+
+Booking.all.each do |booking|
+  review = Review.new
+  review.rate = rand(1..5)
+  review.booking_id = booking.id
+  review.description = Faker::Lorem.sentence(100, true, 40)
+  review.save
+  puts "1 review created for booking #{booking.id}"
+end
+puts "///   #{Review.count} reviews created!"
+
+
+

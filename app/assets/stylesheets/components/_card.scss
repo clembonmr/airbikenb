@@ -49,13 +49,13 @@
 
 .card-body .element {
   flex: 1 1 auto;
-  border-right: 1px solid grey;
+  border-right: 1px solid #dadada;
   min-width: 80px;
   text-align: center;
 }
 
 .last {
-  border-right: 0px solid grey !important;
+  border-right: 0px solid #dadada !important;
 }
 
 
@@ -148,6 +148,9 @@
 
 }
 
+.review-rating img {
+  width: 12px;
+}
 
 
 

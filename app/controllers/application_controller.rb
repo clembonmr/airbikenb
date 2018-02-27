@@ -3,6 +3,22 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :pending?
+
+
+  def pending?
+    @results = []
+    @bookings = Booking.where(status: 0)
+    @bookings.each do |booking|
+      if booking.status == 0
+        @bike = Bike.find(booking.bike_id)
+         if @bike.user_id == current_user.id
+          @results << @bike
+        end
+      end
+    end
+    @results == [] ? false : true
+  end
 
   protected
 

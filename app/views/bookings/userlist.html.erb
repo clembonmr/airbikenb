@@ -15,7 +15,7 @@
           <th>Price</th>
           <th>Status</th>
         </tr>
-        <% @user.bookings.each do |booking|%>
+        <% @user.bookings.reverse.each do |booking|%>
         <tr>
           <td> <%=booking.id %></td>
           <td> <%= cl_image_tag booking.bike.photo, height: 40, width: 40, crop: :fill %> </td>

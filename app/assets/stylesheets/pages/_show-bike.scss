@@ -1,5 +1,6 @@
 
 
+
 .bike-banner {
   height: 60vh;
   width: 100vw;
@@ -17,10 +18,11 @@
 .grid-showbike {
   display: grid;
   grid-template-columns: 220px auto;
-  grid-template-rows: 60px 300px auto;
+  grid-template-rows: 60px 300px 300px;
 }
 
 .gcontent {
+  overflow: hidden;
   margin: 5px;
   padding: 8px;
   background-color: white;
@@ -74,6 +76,7 @@
   grid-row: 3 / span 1;
   grid-column: 2 / span 1;
   border-radius: 6px;
+  padding-right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,7 +89,6 @@
 }
 
 .map-location {
-  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,6 +98,7 @@
 
 .map {
   flex: 1 0 auto;
+  height: 100%;
 }
 
 .edit-bike {

@@ -23,6 +23,10 @@ class BikesController < ApplicationController
       end
     end
 
+    def my_bikes
+      @bikes = Bike.where(user_id: current_user)
+    end
+
     def show
       @reviews = Review.where(bike_id: @bike)
     end

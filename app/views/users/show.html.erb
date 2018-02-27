@@ -1,66 +1,19 @@
-<% if !@user.owner? %>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-3">
+  <div class="row user-">
+    <div class="col-md-4 col-sm-3 user-show-box">
       <h2> <%= @user.name.capitalize%></h2>
-      <%= cl_image_tag @user.photo, height: 100, width: 100, crop: :fill, class: "avatar" %>
-      <p> Email: <%= @user.email %></p>
-      <p> Phone: <%= @user.phone_number %></p>
-      <%= link_to "Edit Your Profile", edit_user_registration_path(current_user.id) %>
+      <%= cl_image_tag @user.photo, height: 150, width: 150, crop: :fill, class: "profile-photo" %>
+      <p> <strong>Email:</strong>  <%= @user.email %></p>
+      <p> <strong>Phone:</strong>  <%= @user.phone_number %></p>
+      <%= link_to edit_user_registration_path(current_user.id) do %>
+      <p class= "edit-profile">Edit your Profile</p><i class="far fa-edit"></i>
+      <% end %>
     </div>
-    <div class="col-lg-9">
+    <div class="col-md-8 col-sm-9 booking-table">
       <h2 style="display: inline-block; margin-right: 10px"> Your next ride</h2>
       <%= link_to "See all...", user_bokings_path(@user.id)%>
-      <%= link_to "See all", user_bokings_path(@user.id)%>
-      <tr>
-        <th>#id</th>
-        <th> Photo</th>
-        <th> Where</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Price</th>
-        <th>Status</th>
-      </tr>
-      <% @user.bookings[0..3].each do |booking|%>
-      <tr>
-        <td> <%=booking.id %></td>
-        <td> <%= cl_image_tag booking.bike.photo, height: 40, width: 40, crop: :fill %> </td>
-        <% @bike = Bike.find(booking.bike.id) %>
-        <td> <%= @bike.location %></td>
-        <td><%= booking.start_date.strftime("%A, %b %d") %></td>
-        <td><%= booking.end_date.strftime("%A, %b %d") %></td>
-        <td><%= booking.total_price %>€ </td>
-        <% if  booking.status == 0  %>
-        <td> <p class ="label label-warning">PENDING</p>
-        </td>
-        <% elsif booking.status == 1 %>
-        <td> <p class ="label label-success">CONFIRMED</p>
-        </td>
-        <% elsif booking.status == 2 %>
-        <td> <p class ="label label-danger">DECLINED</p></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<% else %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4">
-      <h2> <%= @user.name.capitalize%></h2>
-      <%= cl_image_tag @user.photo, height: 100, width: 100, crop: :fill, class: "avatar" %>
-      <p> Email: <%= @user.email %></p>
-      <p> Phone: <%= @user.phone_number %></p>
-      <%= link_to "Edit Your Profile", edit_user_registration_path(current_user.id) %>
-    </div>
-    <div class="col-lg-8">
       <table class="table">
-        <h2 style="display: inline-block; margin-right: 10px"> Your next ride</h2>
-        <%= link_to "See all...", user_bokings_path(@user.id)%>
         <tr>
           <th>#id</th>
           <th> Photo</th>
@@ -93,14 +46,19 @@
       </table>
     </div>
   </div>
+
+  <% if @user.owner? %>
   <div class="row">
-    <div class="col-lg-4">
-      <h3>Manage your Bikes</h3>
+    <div class="col-lg-4 user-show-box">
+      <h3 style="display: inline-block; margin-right: 10px">Manage your Bikes</h3>
+      <%= link_to "See all...", my_bikes_path(@user.id)%>
       <% @user.bikes.each do |bike| %>
-      <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill %>
+      <%= link_to bike_path(bike.id) do %>
+      <div class="user-bike-card" > <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill%></div>
+      <% end %>
       <% end %>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 booking-table">
       <table class="table">
         <h2 style="display: inline-block; margin-right: 10px">Your next renting request</h2>
         <%= link_to "See all...", rent_requests_path(@user.id)%>
@@ -119,7 +77,7 @@
         <% @user.my_rentals[0..3].each do |rental| %>
         <tr>
           <td> <%=rental.id %></td>
-          <td> <%= cl_image_tag rental.bike.photo, height: 40, width: 40, crop: :fill %> </td>
+          <td><%= cl_image_tag rental.bike.photo, height: 40, width: 40, crop: :fill %> </td>
           <td><%= rental.start_date.strftime("%A, %b %d") %></td>
           <td><%= rental.end_date.strftime("%A, %b %d") %></td>
           <td><%= rental.total_price %>€ </td>
@@ -150,15 +108,6 @@
 
     </div>
   </div>
+  <% end %>
+
 </div>
-
-
-
-
-
-
-<% end %>
-
-
-
-

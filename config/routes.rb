@@ -18,5 +18,6 @@ end
   get '/profile/:id', to: 'users#show', as: 'profile';
   get '/user/:id/bookings', to: 'bookings#userlist', as: 'user_bokings'
   get '/user/:id/rent_requests', to: 'bookings#rent_requests', as: 'rent_requests'
+  get '/user/:id/my_bikes', to: 'bikes#my_bikes', as: 'my_bikes'
 
 end

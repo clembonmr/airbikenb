@@ -22,9 +22,24 @@
       <% @bikes.each do |bike| %>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="card">
+
           <% if bike.photo %>
           <div class="card-header" style="background-image: url('<%= image_path bike.photo.url(:card)%>')">
             <p><%= link_to bike.brand, bike_path(bike), class: "card-title" %></p>
+            <i class="fas fa-map-marker-alt card-marker"></i>
+            <p class="card-location"><%= bike.location.capitalize %></p>
+
+            <% if bike.average_rate %>
+              <div class="star-container">
+                <% bike.average_rate.times do %>
+                  <i class="fas fa-star card-star"></i>
+                <% end %>
+                <% (5 - bike.average_rate).times do %>
+                  <i class="far fa-star card-star"></i>
+                <% end %>
+              </div>
+            <% end %>
+
             <%= cl_image_tag bike.user.photo, class: "card-avatar" %>
           </div>
           <% else %>

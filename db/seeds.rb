@@ -42,7 +42,7 @@ puts "///   #{User.count} users in the database!"
 
 puts "///   Creating bikes"
 
-brand = ["Cervélo", "American Eagle", "Avanti", "Bianchi", "Cannondale", "Canyon bicycles", "Diamondback Bicycles", "Giant", "K2 Sports", "Lapierre", "Mongoose", "Scott", "Specialized"]
+brand = ["Cervélo", "American", "Avanti", "Bianchi", "Cannondale", "Canyon", "Diamondback", "Giant", "K2 Sports", "Lapierre", "Mongoose", "Scott", "Specialized"]
 
 category = %w(road moutain city beach enduro hybrid triathlon)
 

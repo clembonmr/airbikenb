@@ -79,9 +79,14 @@
       <div class="col-xs-8 col-xs-offset-2">
 
         <div class="review-card">
-        <p> <strong> Review by </strong> <%=  review.booking.user.name %></p>
-        <p> <strong>Rating</strong> <%= review.rate %></p>
-        <%= review.description %>
+          <div class="review-card-left">
+          <%= cl_image_tag review.booking.user.photo, class: "review-avatar" %>
+          <p> <strong> Review by </strong> <%=  review.booking.user.name %></p>
+          <p class="green-content"> <strong>Rating</strong></p><p> <%= review.rate %></p>
+        </div>
+        <div class="review-card-right">
+          <%= review.description %>
+        </div>
 
       </div>
       </div>

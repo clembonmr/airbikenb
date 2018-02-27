@@ -50,8 +50,8 @@
             <h5>Location</h5><h4 class="green-content"><%= @bike.location.capitalize %></h4>
           </div>
           <div class="map-location">
-            <div style="background: url(<%= image_path "https://maps.googleapis.com/maps/api/staticmap?zoom=8&size=1000x1000&sensor=false&maptype=roadmap&markers=color:red|#{@bike.location}", class: "showbike-map" %>); background-size: cover; background-position: center;" class="showbike-map">
-            </div>
+
+            <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=8&size=1500x1500&sensor=false&maptype=roadmap&markers=color:red|#{@bike.location}", class: "map" %>
           </div>
         </div>
 
@@ -73,14 +73,14 @@
 </div>
 
 
-<h1>Read the <%= @reviews.size %> reviews for this bike</h1>
+<h1>Read the <%= @bike.reviews.size %> reviews for this bike</h1>
 <div class="container">
   <div class="row">
 
-    <% @reviews.each do |review| %>
+    <% @bike.reviews.each do |review| %>
       <div class="col-lg-8 col-lg-offset-2">
 
-      <p> <strong> Review written by </strong> <%=  review.user.name %></p>
+      <p> <strong> Review written by </strong> <%=  review.booking.user.name %></p>
       <p> <strong>Rating</strong> <%= review.rate %></p>
       <p> <strong>Description </strong></p>
       <%= review.description %>

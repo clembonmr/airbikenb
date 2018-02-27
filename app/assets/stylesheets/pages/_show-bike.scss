@@ -79,19 +79,23 @@
   align-items: center;
 }
 
-.map-location {
-  flex-grow: 1;
-}
 
 .text-location {
   text-align: center;
   margin: 10px;
 }
 
-.showbike-map {
+.map-location {
   height: 300px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 6px;
+  overflow: hidden;
+}
+
+.map {
+  flex: 1 0 auto;
 }
 
 .edit-bike {

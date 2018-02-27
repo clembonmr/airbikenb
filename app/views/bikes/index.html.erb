@@ -25,6 +25,8 @@
           <% if bike.photo %>
           <div class="card-header" style="background-image: url('<%= image_path bike.photo.url(:card)%>')">
             <p><%= link_to bike.brand, bike_path(bike), class: "card-title" %></p>
+            <i class="fas fa-map-marker-alt card-marker"></i>
+            <p class="card-location"><%= bike.location.capitalize %></p>
             <%= cl_image_tag bike.user.photo, class: "card-avatar" %>
           </div>
           <% else %>

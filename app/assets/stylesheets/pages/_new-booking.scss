@@ -1,0 +1,20 @@
+.centered {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.red {
+  background-color: #d10000;
+  padding: 25px;
+}
+
+.green {
+  background-color: #96C04D;
+  padding: 25px;
+}
+
+.simple-calendar {
+  .prev-month { text-align: center };
+  .next-month { text-align: center };
+  .current-month { text-align: center };
+}

@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
 
   belongs_to :bike
   belongs_to :user
-  has_one :review
+  has_one :review, dependent: :destroy
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date?
   validate :date_future
@@ -32,6 +32,9 @@ class Booking < ApplicationRecord
     end
   end
 
+  def available(date)
+  end
+
   def total_price
     # @bookings = Booking.where(bike_id: self.bike_id)
     duration = (self.end_date.to_date - self.start_date.to_date).to_i
@@ -40,5 +43,12 @@ class Booking < ApplicationRecord
     return @price
   end
 
+  def start_time
+        self.start_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
+
+  def end_time
+        self.end_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 
 end

@@ -21,7 +21,7 @@
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="card">
           <% if bike.photo %>
-          <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
+          <div class="card-header" style="background-image: url('<%= image_path bike.photo.url(:card)%>')">
             <p><%= link_to bike.brand, bike_path(bike), class: "card-title" %></p>
             <%= cl_image_tag bike.user.photo, class: "card-avatar" %>
           </div>

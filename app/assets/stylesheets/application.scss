@@ -16,3 +16,9 @@
 @import "pages/user_show";
 
 @import "simple_calendar";
+
+
+body {
+  min-height: calc(100vh - 70px);
+  position: relative;
+}

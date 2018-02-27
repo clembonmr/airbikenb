@@ -52,7 +52,9 @@ def average_rate
    sum = 0
    @bookings = Booking.where(bike_id: self.id)
    @bookings.each do |booking|
+    if booking.review.rate
      sum += booking.review.rate.to_i
+    end
    end
     return (sum / (@bookings.size.to_i)).round if @bookings.size > 0
  end

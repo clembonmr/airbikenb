@@ -10,7 +10,7 @@
 
 
 # CREATING USERS
-
+# binding.pry
 puts "///   Deleting all reviews"
 Review.destroy_all
 puts "///   Deleting all bookings"
@@ -32,7 +32,7 @@ puts "///   Creating users"
   end
 end
 
-puts "///   #{User.count} users created!"
+puts "///   #{User.count} users in the database!"
 
 
 
@@ -46,9 +46,11 @@ brand = ["Cervélo", "American Eagle", "Avanti", "Bianchi", "Cannondale", "Canyo
 
 category = %w(road moutain city beach enduro hybrid triathlon)
 
-address = %w(milano roma firenze venize naples bari tarronto lecce pompeii latina ancona vasto andria piza genoa bologna verona turin asti paris berlin lisbon oslo london)
+address = ["milano, italy", "roma, italy", "firenze, italy", "venize, italy", "naples, italy", "bari, italy", "tarronto, italy", "lecce, italy", "pompeii, italy", "latina, italy", "ancona, italy", "vasto, italy", "andria, italy", "piza, italy", "genoa, italy", "bologna, italy", "verona, italy", "turin, italy", "asti, italy", "paris", "berlin", "lisbon", "oslo", "london"]
 
-30.times do
+i = 0
+21.times do
+  i += 1
   bike = Bike.new(
     user_id: User.all.sample.id,
     brand: brand.sample,
@@ -56,7 +58,8 @@ address = %w(milano roma firenze venize naples bari tarronto lecce pompeii latin
     description: Faker::Lorem.sentence(200, true, 40),
     daily_price: rand(5..20)*10,
     location: address.sample,
-    remote_photo_url: "http://res.cloudinary.com/dxkimzdwk/image/upload/v1519361768/b#{rand(1..10)}.jpg")
+    remote_photo_url: "http://res.cloudinary.com/dxkimzdwk/image/upload/v1519361768/b#{i}.jpg")
+
   if bike.save
     puts bike.brand + " created!"
   end
@@ -69,15 +72,20 @@ puts "///   #{Bike.count} bikes created!"
 puts "///   Creating bookings"
 
 Bike.all.each do |bike|
-  x = rand (1..8)
+  x = rand (1..20)
+  delay = 1
   x.times do
     booking = Booking.new
     booking.bike_id = bike.id
     booking.user_id = User.all.sample.id
-    booking.start_date = Date.today + rand(1..100000)
-    booking.end_date = booking.start_date + 7
-    booking.save
-    puts "1 booking just created for #{bike.brand}"
+    booking.start_date = Date.today + (8 * delay).days
+    booking.end_date = booking.start_date + 7.days
+    delay += 1
+    if booking.save
+      puts "1 booking just created for #{bike.brand}"
+    else
+      puts "!!! booking not save"
+    end
   end
 end
 puts "///  #{Booking.count} booking created!"

@@ -9,6 +9,17 @@ class Bike < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_location?
 
 
+  # include PgSearch
+  # pg_search_scope :global_search,
+  #   against: [ :type, :daily_price ],
+  #   associated_against: {
+  #     bike: [ :type, :daily_price ]
+  #   },
+  #   using: {
+  #     tsearch: { prefix: true }
+  #   }
+
+    # Bike.global_search
 
   def avaible?
     @bookings = Booking.where(bike_id: self.id)

@@ -25,6 +25,7 @@ gem "geocoder"
 
 gem 'kaminari'
 
+gem 'pg_search'
 
 
 group :development do

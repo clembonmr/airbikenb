@@ -69,7 +69,7 @@ class BikesController < ApplicationController
     @bike = Bike.new(bike_params)
     @bike.user = current_user
     if @bike.save
-      redirect_to bike_path(@bike.id)
+      redirect_to profile_path(current_user.id)
     else
       render :new
     end

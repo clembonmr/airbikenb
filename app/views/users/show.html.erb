@@ -32,7 +32,9 @@
           <td><%= booking.start_date.strftime("%A, %b %d") %></td>
           <td><%= booking.end_date.strftime("%A, %b %d") %></td>
           <td><%= booking.total_price %>€ </td>
-          <% if  booking.status == 0  %>
+          <% if booking.end_date < Date.today %>
+          <td> <%= link_to "Review!", new_review_path(booking.id) %></td>
+          <% elsif  booking.status == 0  %>
           <td> <p class ="label label-warning">PENDING</p>
           </td>
           <% elsif booking.status == 1 %>
@@ -46,19 +48,31 @@
       </table>
     </div>
   </div>
+</div>
 
   <% if @user.owner? %>
+<div class="container">
   <div class="row">
-    <div class="col-lg-4 user-show-box">
-      <h3 style="display: inline-block; margin-right: 10px">Manage your Bikes</h3>
-      <%= link_to "See all...", my_bikes_path(@user.id)%>
+    <div class="col-md-4 col-sm-3 user-show-box">
+      <h3 style=" margin-right: 10px">Manage your Bikes</h3>
+      <%= link_to my_bikes_path(@user.id), style: "margin-right: 10px" do%>
+      See All <i class="fas fa-search"></i>
+      <% end %>
+      <%= link_to  new_bike_path do %>Add a new Bike<i class="fas fa-plus-circle" style="margin-left: 10px" ></i>
+      <% end %>
+      <div class="row" style="margin-top: 20px">
       <% @user.bikes.each do |bike| %>
+      <div class="col-lg-6" style= "padding:0px 0px; margin-bottom: 13px">
       <%= link_to bike_path(bike.id) do %>
-      <div class="user-bike-card" > <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill%></div>
+      <div class="user-bike-card" style="display: block"> <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill%></div>
       <% end %>
+      </div>
       <% end %>
+
+      </div>
+
     </div>
-    <div class="col-lg-8 booking-table">
+    <div class="col-md-8 col-sm-9 booking-table">
       <table class="table">
         <h2 style="display: inline-block; margin-right: 10px">Your next renting request</h2>
         <%= link_to "See all...", rent_requests_path(@user.id)%>
@@ -104,10 +118,8 @@
         <% end %>
       </table>
       <% end %>
-
-
     </div>
   </div>
   <% end %>
-
 </div>
+

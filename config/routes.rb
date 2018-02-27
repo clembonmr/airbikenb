@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   root to: 'bikes#index'
 
   resources :bikes do
-    resources :bookings
+    resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings do
+  resources :bookings, except: [:new, :create] do
     member do
     patch "confirm"
     patch "decline"

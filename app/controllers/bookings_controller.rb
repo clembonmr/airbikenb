@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+    #@bookings = Booking.all
 end
 
 def userlist
@@ -21,7 +22,6 @@ end
     @bike = Bike.find(params[:bike_id])
     @user = current_user
     @booking = Booking.new
-
   end
 
   def create

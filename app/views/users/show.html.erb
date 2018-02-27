@@ -11,7 +11,7 @@
       <% end %>
     </div>
     <div class="col-md-8 col-sm-9 booking-table">
-      <h2 style="display: inline-block; margin-right: 10px"> Your next ride</h2>
+      <h2 style="display: inline-block; margin-right: 10px"> Your coming ride</h2>
       <%= link_to "See all...", user_bokings_path(@user.id)%>
       <table class="table">
         <tr>
@@ -32,7 +32,7 @@
           <td><%= booking.start_date.strftime("%A, %b %d") %></td>
           <td><%= booking.end_date.strftime("%A, %b %d") %></td>
           <td><%= booking.total_price %>€ </td>
-          <% if booking.end_date < Date.today %>
+          <% if booking.end_date <= Date.today && booking.status == 1 %>
           <td> <%= link_to "Review!", new_review_path(booking.id) %></td>
           <% elsif  booking.status == 0  %>
           <td> <p class ="label label-warning">PENDING</p>
@@ -48,9 +48,25 @@
       </table>
     </div>
   </div>
+
+<% if !@user.owner? %>
+
+  <%= link_to new_bike_path do  %>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 text-center">
+      <div class="alert alert-success" role="success" style="margin-top: 30px">
+        <p>Add a Bike and start to earn money! </p>
+      </div>
+
+    </div>
+  </div>
+
+  <% end %>
+  <% end %>
+
 </div>
 
-  <% if @user.owner? %>
+<% if @user.owner? %>
 <div class="container">
   <div class="row">
     <div class="col-md-4 col-sm-3 user-show-box">
@@ -61,20 +77,20 @@
       <%= link_to  new_bike_path do %>Add a new Bike<i class="fas fa-plus-circle" style="margin-left: 10px" ></i>
       <% end %>
       <div class="row" style="margin-top: 20px">
-      <% @user.bikes.each do |bike| %>
-      <div class="col-lg-6" style= "padding:0px 0px; margin-bottom: 13px">
-      <%= link_to bike_path(bike.id) do %>
-      <div class="user-bike-card" style="display: block"> <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill%></div>
-      <% end %>
-      </div>
-      <% end %>
+        <% @user.bikes.each do |bike| %>
+        <div class="col-lg-6" style= "padding:0px 0px; margin-bottom: 13px">
+          <%= link_to bike_path(bike.id) do %>
+          <div class="user-bike-card" style="display: block"> <%= cl_image_tag bike.photo, height: 150, width: 150, crop: :fill%></div>
+          <% end %>
+        </div>
+        <% end %>
 
       </div>
 
     </div>
     <div class="col-md-8 col-sm-9 booking-table">
       <table class="table">
-        <h2 style="display: inline-block; margin-right: 10px">Your next renting request</h2>
+        <h2 style="display: inline-block; margin-right: 10px">Your booking request</h2>
         <%= link_to "See all...", rent_requests_path(@user.id)%>
 
         <tr>

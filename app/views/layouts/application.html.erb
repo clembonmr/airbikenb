@@ -18,9 +18,9 @@
   <p class="alert"><%= alert %></p> -->
 
   <%=  render "layouts/navbar" %>
-
+<div class="container">
   <%= yield %>
-
+</div>
   <%=  render "layouts/footer" %>
 
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>

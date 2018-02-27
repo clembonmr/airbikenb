@@ -23,7 +23,7 @@
           <th>Price</th>
           <th>Status</th>
         </tr>
-        <% @user.bookings[0..3].each do |booking|%>
+        <% @user.bookings.reverse[0..3].each do |booking|%>
         <tr>
           <td> <%=booking.id %></td>
           <td> <%= cl_image_tag booking.bike.photo, height: 40, width: 40, crop: :fill %> </td>
@@ -74,7 +74,7 @@
         </tr>
 
         <% if !@user.my_rentals.blank? %>
-        <% @user.my_rentals[0..3].each do |rental| %>
+        <% @user.my_rentals.reverse[0..3].each do |rental| %>
         <tr>
           <td> <%=rental.id %></td>
           <td><%= cl_image_tag rental.bike.photo, height: 40, width: 40, crop: :fill %> </td>

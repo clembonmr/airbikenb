@@ -48,5 +48,14 @@ def future_bookings
   end
 end
 
+  def average_rate
+    sum = 0
+    @bookings = Booking.where(bike_id: self.id)
+    @bookings.each do |booking|
+      sum += booking.review.rate.to_i
+    end
+     return (sum / (@bookings.size.to_i)).round
+  end
+
 
 end

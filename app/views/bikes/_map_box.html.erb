@@ -1,14 +1,14 @@
-<div class="card card-map">
+<div class="card-map">
   <% if bike.photo %>
-  <div class="card-header" style="background-image: url('<%= image_path bike.photo%>')">
+  <div class="card-map-header" style="background-image: url('<%= image_path bike.photo%>')">
     <p><%= link_to bike.brand, bike_path(bike), class: "card-title" %></p>
     <%= cl_image_tag bike.user.photo, class: "card-avatar" %>
   </div>
   <% else %>
-  <div class="card-header" style="background-image: url('<%= cl_image_tag("653px-usdot_highway_sign_bicycle_symbol_-_blacksvg.png") %>'); border: 1px solid">
+  <div class="card-map-header" style="background-image: url('<%= cl_image_tag("653px-usdot_highway_sign_bicycle_symbol_-_blacksvg.png") %>'); border: 1px solid">
   </div>
   <% end %>
-  <div class="card-body">
+  <div class="card-map-body">
     <p class="element"><%= bike.category %></p>
     <p class="element"><%= bike.daily_price %> $/day</p>
     <p class="element last"><%= bike.reviews.size %> reviews</p>

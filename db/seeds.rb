@@ -98,7 +98,7 @@ Booking.all.each do |booking|
   review = Review.new
   review.rate = rand(1..5)
   review.booking_id = booking.id
-  review.description = Faker::Lorem.sentence(100, true, 40)
+  review.description = Faker::Lorem.sentence(60, true, 20)
   review.save
   puts "1 review created for booking #{booking.id}"
 end

@@ -1,0 +1,4 @@
+<%= form_tag(bikes_path, method: :get) do %>
+ <%= text_field_tag :location, params[:location], class: "form-control", id: "bike_location" %>
+ <%= submit_tag "Search for bike around you", name: nil, class: "btn new-button"  %>
+<% end %>

@@ -1,21 +1,50 @@
 
+<div style="background: url(<%= cl_image_path @bike.photo %>); background-size: cover; background-position: center;" class="bike-banner">
+
+</div>
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
-      <h1><%=@bike.brand%></h1>
-      <h2>rent by <%=@bike.user.name%></h2>
-      <h4>Category</h4> <p><%=@bike.category%></p>
-      <h4>Description</h4><p><%=@bike.description%></p>
-      <h4>Daily price</h4><p><%=@bike.daily_price%></p>
-      <h4>Location</h4><p><%= @bike.location %></p>
-      <% if @bike.avaible? %>
+
+      <div class="grid-showbike">
+        <div class="grid-left gcontent">
+          <%= cl_image_tag @bike.user.photo, class: "showbike-avatar" %>
+          <p>proposed by </p> <h2><%=@bike.user.name%></h2>
+          <p> from <%=@bike.daily_price%> $/day</p>
+          <% if @bike.avaible? %>
+        </div>
+        <div class="grid-top-right gcontent">
+          <h1><%=@bike.brand%></h1>
+          <div class="cat-grid">
+            <h4>Category</h4> <p><%=@bike.category%></p>
+          </div>
+        </div>
+        <div class="grid-middle-right gcontent">
+          <h4>A few words about my bike: </h4>
+          <p><%=@bike.description%></p>
+        </div>
+        <div class="grid-bottom-right gcontent">
+          <h4>Location</h4><h4><%= @bike.location.capitalize %></h4>
+          <div style="background: url(<%= image_path "https://maps.googleapis.com/maps/api/staticmap?zoom=8&size=1000x1000&sensor=false&maptype=roadmap&markers=color:red|#{@bike.location}", class: "showbike-map" %>); background-size: cover; background-position: center;" class="showbike-map">
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
 
       <p style="color: red"> Bike Avaible for rent!</p>
       <% else  %>
       <p style="color: red">  Bike actually not avaible!</p>
       <p style="color: red"> The bike will be avaible agan on <%= @bike.avaibility %> </p>
       <% end %>
-      <%= cl_image_tag @bike.photo, height: 600, width: 800, crop: :fill %>
 
       <%= link_to "Edit bike", edit_bike_path(@bike) %>
       <%= link_to bike_path(@bike.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
@@ -44,21 +73,21 @@
 
 <div class="container">
   <div class="row">
-      <div class="col-lg-8 col-lg-offset-2">
-                 <h1>Read the reviews</h1>
-          <% @reviews.each do |review| %>
+    <div class="col-lg-8 col-lg-offset-2">
+     <h1>Read the reviews</h1>
+     <% @reviews.each do |review| %>
 
-          <div class="row" style="border: 1px solid black; border-radius: 2px">
-          <p> <strong> Review written by </strong>review.user.name</p>
-          <p> <strong>Rating</strong> <%= review.rate %></p>
-          <p> <strong>Description </strong></p>
-          <%= review.description %>
+     <div class="row" style="border: 1px solid black; border-radius: 2px">
+      <p> <strong> Review written by </strong>review.user.name</p>
+      <p> <strong>Rating</strong> <%= review.rate %></p>
+      <p> <strong>Description </strong></p>
+      <%= review.description %>
 
-       </div>
+    </div>
 
-     <% end %>
-      </div>
+    <% end %>
   </div>
+</div>
 </div>
 
 

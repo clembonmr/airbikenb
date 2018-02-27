@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row user-">
+    <div class="col-sm-12">
+      <h2 style="display: inline-block; margin-right: 10px"> All your Bikes</h2>
+      <%= link_to "Back to your profile page", profile_path(current_user.id)%>
+      <table class="table">
+        <tr>
+          <th>#id</th>
+          <th>Photo</th>
+          <th>Where</th>
+          <th>Brand</th>
+          <th>Daily Price</th>
+          <th></th>
+        </tr>
+        <% @bikes.each do |bike|%>
+        <tr>
+          <td> <%=bike.id %></td>
+          <td> <%= cl_image_tag bike.photo, height: 40, width: 40, crop: :fill %> </td>
+          <td> <%=bike.location %></td>
+          <td> <%=bike.brand %></td>
+          <td> <%=bike.daily_price %></td>
+          <td> </td>
+          <td> <%=link_to edit_bike_path(bike.id) do %>
+                <i class="far fa-edit"></i>
+            <% end %></td>
+
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>

@@ -1,0 +1,33 @@
+.user-data {
+  list-style-type: none;
+  font-size: 20px;
+  margin: 0 auto;
+}
+
+.user-show-box{
+  text-align: center;
+  border-right: 1px solid #DDDDDD;
+  margin-bottom: 0px;
+}
+
+
+.edit-profile{
+  display: inline;
+  margin-right: 8px;
+}
+
+.user-bike-card{
+opacity: 0.8;
+display: inline
+}
+
+.user-bike-card:hover{
+  opacity: 1;
+  cursor: pointer;
+
+}
+
+.profile-photo{
+  border-radius: 50%;
+  margin-bottom: 15px;
+}

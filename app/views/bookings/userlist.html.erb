@@ -1,14 +1,15 @@
 
-
-<h2>Your Booking History </h2>
-
 <div class="container">
+  <h2>Your Booking History </h2>
+
   <div class="row">
-    <div class="col-lg-12">
-            <table class="table">
+    <div class="col-lg-12 text-center">
+      <table class="table">
         <tr>
           <th>#id</th>
           <th> Photo</th>
+          <th> Where</th>
+          <th> Owner</th>
           <th>From</th>
           <th>To</th>
           <th>Price</th>
@@ -18,15 +19,21 @@
         <tr>
           <td> <%=booking.id %></td>
           <td> <%= cl_image_tag booking.bike.photo, height: 40, width: 40, crop: :fill %> </td>
+          <% @bike = Bike.find(booking.bike_id)%>
+          <td> <%= @bike.location %></td>
+          <% @owner = User.find(@bike.user_id) %>
+          <td> <%= @owner.name %></td>
           <td><%= booking.start_date.strftime("%A, %b %d") %></td>
           <td><%= booking.end_date.strftime("%A, %b %d") %></td>
           <td><%= booking.total_price %>€ </td>
-          <% if  booking.status == 0  %>
-          <td> Pending</td>
+          <% if booking.end_date < Date.today && booking.status == 1 %>
+          <%= link_to "Leave a review", new_review_path(booking.id) %>
+          <% elsif  booking.status == 0  %>
+          <td> <p class ="label label-warning">PENDING</p></td>
           <% elsif booking.status == 1 %>
-          <td class ="btn btn-success"> Confirmed </td>
+          <td> <p class ="label label-success">CONFIRMED</p> </td>
           <% elsif booking.status == 2 %>
-          <td> Declined</td>
+          <td> <p class ="label label-danger">DECLINED</p></td>
           <% end %>
         </tr>
         <% end %>
@@ -35,6 +42,3 @@
     </div>
   </div>
 </div>
-
-
-

@@ -8,6 +8,14 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
 end
 
+def userlist
+  @user = current_user
+end
+
+def rent_requests
+   @user = current_user
+end
+
 
   def new
     @bike = Bike.find(params[:bike_id])
@@ -39,7 +47,7 @@ end
     @booking = Booking.find(params[:id])
     @booking.status = 1
     @booking.save
-    redirect_to booking_path(@booking.id)
+    redirect_to rent_requests_path(current_user.id)
   end
 
 

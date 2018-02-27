@@ -1,5 +1,7 @@
+    <% if @json %>
      <%= javascript_tag do %>
      window.bookingList = '<%= @json.html_safe%>';
+     <% end %>
      <% end %>
 
 
@@ -17,6 +19,12 @@
 <div class="main-container">
   <div class="card-wrapper">
     <div class="row">
+<!--       trying to implement the form -->
+      <!-- <form action="<%= bikes_path %>" method="get">
+         <input type="text" name="query">
+        <input type="submit">
+      </form>
+ -->
       <% @bikes.each do |bike| %>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="card">

@@ -18,13 +18,14 @@ gem 'webpacker'
 gem 'devise'
 gem 'cloudinary'
 gem 'carrierwave', '~> 0.11.2'
-
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'faker'
 
 gem "geocoder"
 
 gem 'kaminari'
 
+gem 'pg_search'
 
 
 group :development do

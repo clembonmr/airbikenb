@@ -11,4 +11,5 @@ class PhotoUploader < CarrierWave::Uploader::Base
     resize_to_fit 1600, 1600
   end
 
+
 end
